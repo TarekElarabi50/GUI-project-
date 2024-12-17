@@ -1,49 +1,93 @@
-import tkinter as tk
-from gtts import gTTS
-import playsound
-import os
+from tkinter import*
+from yt_dlp import YoutubeDL
 
-def text_to_speech():
-    text = entry.get()
-    if text.strip():
-        audio_file = "speech.mp3"
-        try:
-            tts = gTTS(text=text, lang='en')
-            tts.save(audio_file)
-            playsound.playsound(audio_file)
+
+def hight_quality():
+    try:
+        url = entry.get()
+
+        ydl_opts ={
+            'format':'best',
+            'outtmpl':'downloads%(titles)%(ext)s'
+
+        }
+
+        with YoutubeDL(ydl-opts) as ydl:
+            ydl.download([url])
+
+            print("the vedio has been downloaded")
+
+            except Exception as e:
+
+
+
+
+            print("Error downloading")
+
+
+def low_quality():
+    try:
+        url =entry.get()
+
+        ydl_opts ={
+            'format':'worst',
+            'outtmpl':'downloads%(titles)%(ext)s'
+
+        }
+
+        with YoutubeDL(ydl-opts) as ydl:
+            ydl.download([url])
+
+            print("the vedio has been downloaded")
+        
+
+
         except Exception as e:
-            print(f"An error occurred: {str(e)}")
-        finally:
-            if os.path.exists(audio_file):
-                os.remove(audio_file)
-    else:
-        print("Please enter text to convert.")
+            print("Error downloading")
 
-def clear_text():
-    entry.delete(0, tk.END)
+def get_audio():
+    try:
+        url =entry.get()
 
-def exit_app():
-    root.destroy()
+        ydl_opts ={
+            'format':'best audio',
+            'outtmpl':'downloads%(titles)%(ext)s'
 
-root = tk.Tk()
-root.title("Text to Speech Project")
-root.geometry("600x500")
-root.configure(bg="white")
+        }
 
-label = tk.Label(root, text="Text to Speech Project", font=("Arial", 16, "bold"), bg="white", fg="black")
-label.pack(pady=20)
+        with YoutubeDL(ydl-opts) as ydl:
+            ydl.download([url])
 
-entry = tk.Entry(root, width=40, font=("Arial", 14), bd=2, bg="lightgrey", fg="black")
-entry.pack(pady=10, padx=20)
-button_frame = tk.Frame(root, bg="white")
-button_frame.pack(pady=5)
+            print("the vedio has been downloaded")
+        
 
-play_button = tk.Button(button_frame, text="Play", command=text_to_speech, bg="black", fg="white", width=12, height=2)
-play_button.pack(side=tk.LEFT, padx=10)
+        except Exception as e:
+            print("Error downloading")
 
-clear_button = tk.Button(button_frame, text="Clear", command=clear_text, bg="blue", fg="white", width=12, height=2)
-clear_button.pack(side=tk.LEFT, padx=10)
 
-exit_button = tk.Button(button_frame, text="Exit", command=exit_app, bg="red", fg="white", width=12, height=2)
-exit_button.pack(side=tk.LEFT, padx=10, fill=tk.BOTH, expand=True)
-root.mainloop()
+
+window = Tk()
+window.title ("kareem")
+window.geometry("600x500")
+window.configure(bg ="pink")
+
+
+
+label = Label(window, text ="add your youtube link here ", font ="bold" , bg =window['bg'])
+label.place(x=200 , y=30)
+
+
+entry = Entry(window, width = 50)
+entry.place(x= 200, y =60)
+
+hight = Button(window, text="Hight Quality" ,  command=hight_quality) 
+hight.place(x= 100, y = 200)
+
+low = Button(window, text="Low Quality" , command=low_quality) 
+low.place(x=200, y = 200)
+
+audio= Button(window, text="Get Audio" , command=get_audio) 
+audio.place(x= 300, y = 200)
+ 
+
+Window.mainloop()
