@@ -1,93 +1,64 @@
-from tkinter import*
+from tkinter import *
 from yt_dlp import YoutubeDL
 
-
-def hight_quality():
+def high_quality():
     try:
         url = entry.get()
-
-        ydl_opts ={
-            'format':'best',
-            'outtmpl':'downloads%(titles)%(ext)s'
-
+        ydl_opts = {
+            'format': 'best',
+            'outtmpl': 'downloads/%(title)s.%(ext)s'
         }
-
-        with YoutubeDL(ydl-opts) as ydl:
+        with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
-
-            print("the vedio has been downloaded")
-
-            except Exception as e:
-
-
-
-
-            print("Error downloading")
-
+            print("The video has been downloaded in high quality.")
+    except Exception as e:
+        print(f"Error downloading: {e}")
 
 def low_quality():
     try:
-        url =entry.get()
-
-        ydl_opts ={
-            'format':'worst',
-            'outtmpl':'downloads%(titles)%(ext)s'
-
+        url = entry.get()
+        ydl_opts = {
+            'format': 'worst',
+            'outtmpl': 'downloads/%(title)s.%(ext)s'
         }
-
-        with YoutubeDL(ydl-opts) as ydl:
+        with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
-
-            print("the vedio has been downloaded")
-        
-
-
-        except Exception as e:
-            print("Error downloading")
+            print("The video has been downloaded in low quality.")
+    except Exception as e:
+        print(f"Error downloading: {e}")
 
 def get_audio():
     try:
-        url =entry.get()
-
-        ydl_opts ={
-            'format':'best audio',
-            'outtmpl':'downloads%(titles)%(ext)s'
-
+        url = entry.get()
+        ydl_opts = {
+            'format': 'bestaudio',
+            'outtmpl': 'downloads/%(title)s.%(ext)s'
         }
-
-        with YoutubeDL(ydl-opts) as ydl:
+        with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
-
-            print("the vedio has been downloaded")
-        
-
-        except Exception as e:
-            print("Error downloading")
-
+            print("The audio has been downloaded.")
+    except Exception as e:
+        print(f"Error downloading: {e}")
 
 
 window = Tk()
-window.title ("kareem")
+window.title("YouTube Downloader")
 window.geometry("600x500")
-window.configure(bg ="pink")
+window.configure(bg="pink")
 
+label = Label(window, text="Add your YouTube link here", font="bold", bg="pink")
+label.place(x=200, y=30)
 
+entry = Entry(window, width=50)
+entry.place(x=200, y=60)
 
-label = Label(window, text ="add your youtube link here ", font ="bold" , bg =window['bg'])
-label.place(x=200 , y=30)
+high_btn = Button(window, text="High Quality", command=high_quality)
+high_btn.place(x=100, y=200)
 
+low_btn = Button(window, text="Low Quality", command=low_quality)
+low_btn.place(x=200, y=200)
 
-entry = Entry(window, width = 50)
-entry.place(x= 200, y =60)
+audio_btn = Button(window, text="Get Audio", command=get_audio)
+audio_btn.place(x=300, y=200)
 
-hight = Button(window, text="Hight Quality" ,  command=hight_quality) 
-hight.place(x= 100, y = 200)
-
-low = Button(window, text="Low Quality" , command=low_quality) 
-low.place(x=200, y = 200)
-
-audio= Button(window, text="Get Audio" , command=get_audio) 
-audio.place(x= 300, y = 200)
- 
-
-Window.mainloop()
+window.mainloop()
